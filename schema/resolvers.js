@@ -50,6 +50,14 @@ const resolvers = {
             });
             return updatedUser;
         },
+        deleteUser: (parent, args) => {
+            const id = args.id;
+            const index = UserList.findIndex((user) => user.id === Number(id));
+            if (index != -1) {
+                return UserList.splice(index, 1)[0];
+            }
+            return null;
+        },
     },
 };
 
