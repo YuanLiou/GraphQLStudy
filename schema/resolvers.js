@@ -1,8 +1,9 @@
-const { UserList } = require("../FakeData");
+const { UserList, MovieList } = require("../FakeData");
 const _ = require("lodash");
 
 const resolvers = {
     Query: {
+        // USER RESOLVERS
         // you can define like this `users() {}`, too
         users: () => {
             return UserList;
@@ -11,7 +12,17 @@ const resolvers = {
             const id = args.id;
             const user = _.find(UserList, { id: Number(id) });
             return user;
-        }
+        },
+
+        // MOVIE RESOLVERS
+        movies: () => {
+            return MovieList;
+        },
+        movie: (parent, args) => {
+            const name = args.name;
+            const movie = _.find(MovieList, { name })
+            return movie;
+        },
     },
 };
 
