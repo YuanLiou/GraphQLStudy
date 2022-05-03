@@ -5,7 +5,9 @@ const resolvers = {
     Query: {
         // USER RESOLVERS
         // you can define like this `users() {}`, too
-        users: () => {
+        users: (parent, args, context) => {
+            // this would print { name: 'Pedro' }, this is an object
+            console.log(context)
             return UserList;
         },
         user: (parent, args) => {
