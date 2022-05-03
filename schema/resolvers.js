@@ -6,8 +6,8 @@ const resolvers = {
         // USER RESOLVERS
         // you can define like this `users() {}`, too
         users: (parent, args, context) => {
-            // this would print { name: 'Pedro' }, this is an object
-            console.log(context)
+            // this can access the header of your request
+            console.log(context.req.headers)
             return UserList;
         },
         user: (parent, args) => {

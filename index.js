@@ -5,8 +5,9 @@ const { resolvers } = require("./schema/resolvers");
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: () => {
-        return {name: "Pedro"}
+    // you can access all your request on context
+    context: ({ req }) => {
+        return { req }
     }
 });
 
