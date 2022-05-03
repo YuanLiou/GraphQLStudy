@@ -5,10 +5,11 @@ const resolvers = {
     Query: {
         // USER RESOLVERS
         // you can define like this `users() {}`, too
-        users: (parent, args, context) => {
-            // this can access the header of your request
-            console.log(context.req.headers)
-            return UserList;
+        users: () => {
+            if (UserList) {
+                return {users: UserList};
+            }
+            return {message: "there was an error."};
         },
         user: (parent, args) => {
             const id = args.id;
@@ -61,6 +62,17 @@ const resolvers = {
             return null;
         },
     },
+    UsersResult: {
+        __resolveType(obj) {
+            if (obj.users) {
+                return "UsersSuccessfulResult";
+            }
+            if (obj.message) {
+                return "UsersErrorResult";
+            }
+            return null;
+        }
+    }
 };
 
 module.exports = { resolvers };
